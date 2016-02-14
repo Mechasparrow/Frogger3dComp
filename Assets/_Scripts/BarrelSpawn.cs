@@ -4,13 +4,14 @@ using System.Collections;
 public class BarrelSpawn : MonoBehaviour {
 
     public GameObject Barrel_prefab;
-    public Transform barrel_spawn_point;
-
+    public float speed;
+    public float barrel_speed;
+    public string direction;
 
 
 	// Use this for initialization
 	void Start () {
-        InvokeRepeating("spawnBarrel", 0.5f, 1f);
+        InvokeRepeating("spawnBarrel", speed, speed);
 	}
 	
 	// Update is called once per frame
@@ -21,8 +22,10 @@ public class BarrelSpawn : MonoBehaviour {
     void spawnBarrel()
     {
         GameObject go = Instantiate(Barrel_prefab) as GameObject;
-        go.transform.position = barrel_spawn_point.position;
-
+        go.transform.position = gameObject.transform.position;
+        Barrel bar = go.GetComponent<Barrel>();
+        bar.speed = barrel_speed; 
+        bar.direction = direction;
 
     }
 

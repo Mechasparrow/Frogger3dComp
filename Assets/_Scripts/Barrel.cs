@@ -4,7 +4,8 @@ using System.Collections;
 public class Barrel : MonoBehaviour {
 
     bool touching_ground;
-
+    public string direction;
+    public float speed;
 
 	// Use this for initialization
 	void Start () {
@@ -13,21 +14,26 @@ public class Barrel : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (touching_ground == true) {
-            Rigidbody rb = gameObject.GetComponent<Rigidbody>();
-            rb.velocity = new Vector3(10f, 0f, 0f);
-        }
-
-        
-	}
-
-    void OnCollisionEnter(Collision c)
-    {
-        if (c.gameObject.tag == "Ground")
+        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+        Vector3 vel = new Vector3(0f, 0f, 0f);
+        if (direction == "right")
         {
-            touching_ground = true;
-            print("true");
+            vel.x = speed * Time.deltaTime;  
+        } else if (direction == "left")
+        {
+
         }
+
+        switch (direction)
+        {
+            case "right":
+                vel.x = speed * Time.deltaTime;
+                break;
+            case "left":
+                vel.x = speed * Time.deltaTime * -1;
+                break;
+        }
+        rb.velocity = vel;
     }
 
 

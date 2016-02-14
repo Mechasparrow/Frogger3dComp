@@ -6,7 +6,9 @@ public class PlayerControl : MonoBehaviour {
     // Use this for initialization
     bool press;
     Vector2 simple_pos;
-    public Camera cam; 
+    public Transform spawn_point;
+
+
 
     void Start () {
         press = false;
@@ -24,20 +26,19 @@ public class PlayerControl : MonoBehaviour {
 
 
         Vector3 temp_pos = gameObject.transform.position;
-        Vector3 cam_angles = new Vector3(0, 0, 0);
 
 
         //Horizontal Movement
 
-        if (Horizontal > 0 && press == false && simple_pos.x < 1)
+        if (Horizontal > 0 && press == false && simple_pos.x < 2)
         {
             simple_pos.x += 1;
-            temp_pos.x += 5f;
+            temp_pos.x += 2.5f;
             press = true;
-        }else if (Horizontal < 0 && press == false && simple_pos.x > -1)   
+        }else if (Horizontal < 0 && press == false && simple_pos.x > -2)   
         {
             simple_pos.x -= 1;
-            temp_pos.x -= 5f;
+            temp_pos.x -= 2.5f;
             press = true;
         }
         //Vertical Movement
@@ -57,22 +58,21 @@ public class PlayerControl : MonoBehaviour {
         {
             press = false;
         }
-        
-
-
-        if (Input.GetKeyDown(KeyCode.Q)){
-            Vector3 angles = cam.transform.rotation.eulerAngles;
-        }else if (Input.GetKeyDown(KeyCode.E))
-        {
-            Vector3 angles = cam.transform.rotation.eulerAngles;
-
-        }
-
-
 
         gameObject.transform.position = temp_pos;
 
 
 
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Barrel") {
+            gameObject.transform.position = spawn_point.transform.position;
+            simple_pos = new Vector2(0f, 0f);
+        }
+
+    }
+
+
 }
