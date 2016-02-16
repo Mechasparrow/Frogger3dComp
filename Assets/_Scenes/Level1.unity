@@ -538,6 +538,18 @@ Prefab:
       propertyPath: spawn_point
       value: 
       objectReference: {fileID: 866740019}
+    - target: {fileID: 2364104, guid: 8dde7949ae9848f469db13659fffd169, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 155296, guid: 8dde7949ae9848f469db13659fffd169, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11487372, guid: 8dde7949ae9848f469db13659fffd169, type: 2}
+      propertyPath: prefab_explosion
+      value: 
+      objectReference: {fileID: 144830, guid: b795fb7bf3c9c544e83f32758c8d3805, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8dde7949ae9848f469db13659fffd169, type: 2}
   m_IsPrefabParent: 0

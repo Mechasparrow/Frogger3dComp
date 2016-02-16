@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour {
     bool press;
     Vector2 simple_pos;
     public Transform spawn_point;
+	public GameObject prefab_explosion;
 
 
 
@@ -68,11 +69,23 @@ public class PlayerControl : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Barrel") {
-            gameObject.transform.position = spawn_point.transform.position;
+			GameObject explosion = Instantiate (prefab_explosion) as GameObject;
+			explosion.transform.position = gameObject.transform.position;
+
+
+			gameObject.SetActive (false);
+			Invoke ("Respawn", 1.1f);
             simple_pos = new Vector2(0f, 0f);
-        }
+		}
 
     }
+
+	void Respawn(){
+		gameObject.SetActive (true);
+		gameObject.transform.position = spawn_point.transform.position;
+	}
+
+
 
 
 }
