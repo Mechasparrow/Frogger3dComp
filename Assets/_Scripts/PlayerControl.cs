@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class PlayerControl : MonoBehaviour {
 
@@ -8,7 +10,7 @@ public class PlayerControl : MonoBehaviour {
     Vector2 simple_pos;
     public Transform spawn_point;
 	public GameObject prefab_explosion;
-
+    public List<GameObject> collidedobjects = new List<GameObject>();
 
 
     void Start () {
@@ -62,22 +64,32 @@ public class PlayerControl : MonoBehaviour {
 
         gameObject.transform.position = temp_pos;
 
+        if (collidedobjects.Count > 0)
+        {
+            for (int i = 0; i != collidedobjects.Count; i++)
+            {
+                if (collidedobjects[i].tag == "Ground-Reg")
+                {
+                    break;
+                }else if (collidedobjects[i].tag == "Barrel" || collidedobjects[i].tag == "Ground-Water")
+                {
+                    GameObject explosion = Instantiate(prefab_explosion) as GameObject;
+                    explosion.transform.position = gameObject.transform.position;
 
+                    gameObject.SetActive(false);
+                    Invoke("Respawn", 1.1f);
+                    simple_pos = new Vector2(0f, 0f);
+                }
+            }
+
+        }
+        collidedobjects = new List<GameObject>();
 
 	}
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Barrel") {
-			GameObject explosion = Instantiate (prefab_explosion) as GameObject;
-			explosion.transform.position = gameObject.transform.position;
-
-
-			gameObject.SetActive (false);
-			Invoke ("Respawn", 1.1f);
-            simple_pos = new Vector2(0f, 0f);
-		}
-
+        collidedobjects.Add(other.gameObject);
     }
 
 	void Respawn(){
