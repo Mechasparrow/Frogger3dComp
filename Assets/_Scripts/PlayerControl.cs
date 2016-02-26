@@ -49,12 +49,12 @@ public class PlayerControl : MonoBehaviour {
             temp_pos.z += 2.5f;
             press = true;
         }
-        else if (Vertical < 0 && press == false)
+        /**else if (Vertical < 0 && press == false)
         {
             simple_pos.y -= 1;
             temp_pos.z -= 2.5f;
             press = true;
-        }else if (Vertical == 0 && Horizontal == 0)
+        }**/else if (Vertical == 0 && Horizontal == 0)
         {
             press = false;
         }

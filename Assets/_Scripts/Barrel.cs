@@ -36,5 +36,14 @@ public class Barrel : MonoBehaviour {
         rb.velocity = vel;
     }
 
+    void OnTriggerEnter (Collider other)
+    {
+        if (other.gameObject.tag == "BarrelDestroy")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
 
 }
