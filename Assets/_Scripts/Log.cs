@@ -7,11 +7,13 @@ bool touching_ground;
     public float timethres = 500f;
     GameObject player = null;
     float elapsedtime;
-    int allowthing = 0;
+	float elapsedtime2;
+    int allowthing = -1;
 	// Use this for initialization
 	void Start () {
         touching_ground = false;
         elapsedtime = 0f;
+		elapsedtime2 = 0f;
 	}
 
     void Update()
@@ -24,6 +26,8 @@ bool touching_ground;
 
 
         elapsedtime += Time.deltaTime;
+		elapsedtime2 += Time.deltaTime;
+
 
         Vector3 TempPos = gameObject.transform.position;
         Vector3 PlayerPos = new Vector3(0f,0f,0f);
@@ -31,6 +35,12 @@ bool touching_ground;
         {
             PlayerPos = player.transform.position;
         }
+
+		if (elapsedtime2 > 100f/1000 && player != null) {
+			allowthing += 1;
+			elapsedtime2 = 0;
+			print ("20 ms");
+		}	
 
         if (Horizontal != 0 || Vertical != 0)
         {
@@ -41,6 +51,10 @@ bool touching_ground;
             }
 
         }
+
+
+			
+
         if (elapsedtime > timethres/1000)
         {
             switch (direction)
@@ -50,7 +64,6 @@ bool touching_ground;
                     if (player != null)
                     {
                         PlayerPos.x += 2.5f;
-                        allowthing += 1;
                     }
                     break;
                 case "left":
@@ -58,7 +71,6 @@ bool touching_ground;
                     if (player != null)
                     {
                         PlayerPos.x -= 2.5f;
-                        allowthing += 1;
                     }
                     break;
             }
@@ -87,7 +99,7 @@ bool touching_ground;
             player.layer = 9;
             print("Player");
             
-        }else if (other.gameObject.tag == "LogDestroy")
+        }if (other.gameObject.tag == "LogDestroy")
         {
             Destroy(gameObject);
         }
