@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour {
     Vector2 simple_pos;
     public Transform spawn_point;
 	public GameObject prefab_explosion;
+
     public List<GameObject> collidedobjects = new List<GameObject>();
 
 
@@ -68,18 +69,16 @@ public class PlayerControl : MonoBehaviour {
         {
             for (int i = 0; i != collidedobjects.Count; i++)
             {
-                if (collidedobjects[i].tag == "Ground-Reg")
-                {
-                    break;
-                }else if (collidedobjects[i].tag == "Barrel" || collidedobjects[i].tag == "Ground-Water")
-                {
-                    GameObject explosion = Instantiate(prefab_explosion) as GameObject;
-                    explosion.transform.position = gameObject.transform.position;
+				if (collidedobjects [i].tag == "Ground-Reg") {
+					break;
+				} else if (collidedobjects [i].tag == "Barrel" || collidedobjects [i].tag == "Ground-Water") {
+					GameObject explosion = Instantiate (prefab_explosion) as GameObject;
+					explosion.transform.position = gameObject.transform.position;
 
-                    gameObject.SetActive(false);
-                    Invoke("Respawn", 1.1f);
-                    simple_pos = new Vector2(0f, 0f);
-                }
+					gameObject.SetActive (false);
+					Invoke ("Respawn", 1.1f);
+					simple_pos = new Vector2 (0f, 0f);
+				}
             }
 
         }

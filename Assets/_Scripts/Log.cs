@@ -4,7 +4,7 @@ using System.Collections;
 public class Log : MonoBehaviour {
 bool touching_ground;
     public string direction;
-    public float timethres = 500f;
+	public float speed;
     GameObject player = null;
     float elapsedtime;
 	float elapsedtime2;
@@ -18,6 +18,8 @@ bool touching_ground;
 
     void Update()
     {
+
+
         float Horizontal = 0f;
         float Vertical = 0f;
 
@@ -54,28 +56,25 @@ bool touching_ground;
 
 
 			
-
-        if (elapsedtime > timethres/1000)
-        {
             switch (direction)
             {
-                case "right":
-                    TempPos.x += 2.5f;
+			case "right":
+			TempPos.x += speed * Time.deltaTime;
                     if (player != null)
                     {
-                        PlayerPos.x += 2.5f;
+						PlayerPos.x += speed * Time.deltaTime;
                     }
                     break;
                 case "left":
-                    TempPos.x -= 2.5f;
+			TempPos.x -= speed * Time.deltaTime;
                     if (player != null)
                     {
-                        PlayerPos.x -= 2.5f;
+				PlayerPos.x -= speed * Time.deltaTime;
                     }
                     break;
             }
             elapsedtime = 0f;
-        }
+        
 
         gameObject.transform.position = TempPos;
         if (player != null)

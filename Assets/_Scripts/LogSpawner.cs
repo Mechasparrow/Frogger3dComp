@@ -25,7 +25,7 @@ public class LogSpawner : MonoBehaviour {
 		GameObject go = Instantiate(Log_prefab) as GameObject;
 		go.transform.position = gameObject.transform.position;
 		Log log = go.GetComponent<Log>();
-		log.timethres = log_speed; 
+		log.speed = log_speed; 
 		log.direction = direction;
 
 		print ("log spawn");

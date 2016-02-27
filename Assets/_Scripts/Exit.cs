@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Exit : MonoBehaviour {
 
+	public GameObject prefab_explosion;
+
+
 	// Use this for initialization
 	void Start () {
 	
@@ -17,6 +20,9 @@ public class Exit : MonoBehaviour {
     {
         if (c.gameObject.tag == "Player")
         {
+			GameObject explosion = Instantiate (prefab_explosion) as GameObject;
+			explosion.transform.position = gameObject.transform.position;
+			c.gameObject.SetActive (false);
             print("Game End");
         }
     }
