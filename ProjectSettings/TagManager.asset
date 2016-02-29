@@ -10,6 +10,8 @@ TagManager:
   - Ground-Water
   - Ground
   - LogDestroy
+  - Wall
+  - Reg-Wall
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - Obstacles
   - Platform
   - Player
-  - 
+  - despawner
   - 
   - 
   - 

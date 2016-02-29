@@ -16,20 +16,32 @@ public class CameraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 cameraPos = gameObject.transform.position;
-        Vector3 playerPos = player.position;
-
-        cameraPos.y = playerPos.y + offsety;
-        cameraPos.z = playerPos.z + offsetz;
+        float vertical = Input.GetAxisRaw("Vertical");
 
 
+        if (vertical > 0)
+        {
+            Camera cam = gameObject.GetComponent<Camera>();
+            Vector3 cam_pos = gameObject.transform.position;
 
-        gameObject.transform.position = cameraPos;
+            cam_pos.z = player.transform.position.z;
 
-
-
-
-
-
+            gameObject.transform.position = cam_pos;
+        }
+        
+       
 	}
+
+    public void respawn_player()
+    {
+        Camera cam = gameObject.GetComponent<Camera>();
+        Vector3 cam_pos = gameObject.transform.position;
+
+        cam_pos.z = player.transform.position.z;
+
+        gameObject.transform.position = cam_pos;
+    }
+
+
+
 }

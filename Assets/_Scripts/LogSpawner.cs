@@ -27,7 +27,5 @@ public class LogSpawner : MonoBehaviour {
 		Log log = go.GetComponent<Log>();
 		log.speed = log_speed; 
 		log.direction = direction;
-
-		print ("log spawn");
 	}
 }

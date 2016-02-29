@@ -27,7 +27,7 @@ GameObject:
   - 33: {fileID: 3313636}
   - 65: {fileID: 6511356}
   - 23: {fileID: 2393734}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: LogDestroy
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0.3, z: 3.55}
+  m_LocalPosition: {x: -5, y: 0.3, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 466826}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Log_prefab: {fileID: 112064, guid: 35a24ee778a5e074992f3b5900f3f641, type: 2}
   speed: 3
-  log_speed: 500
+  log_speed: 5
   direction: right
 --- !u!1001 &100100000
 Prefab:

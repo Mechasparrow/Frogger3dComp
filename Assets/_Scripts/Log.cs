@@ -19,17 +19,20 @@ bool touching_ground;
     void Update()
     {
 
-
+        //get player input
         float Horizontal = 0f;
         float Vertical = 0f;
 
-        Horizontal = Input.GetAxis("Horizontal");
-        Vertical = Input.GetAxis("Vertical");
+        Horizontal = Input.GetAxisRaw("Horizontal");
+        Vertical = Input.GetAxisRaw("Vertical");
 
-
+        //get the elapsedtime
         elapsedtime += Time.deltaTime;
-		elapsedtime2 += Time.deltaTime;
 
+        if (player != null)
+        {
+            elapsedtime2 += Time.deltaTime;
+        }
 
         Vector3 TempPos = gameObject.transform.position;
         Vector3 PlayerPos = new Vector3(0f,0f,0f);
@@ -38,7 +41,7 @@ bool touching_ground;
             PlayerPos = player.transform.position;
         }
 
-		if (elapsedtime2 > 100f/1000 && player != null) {
+		if (elapsedtime2 > 80f/1000 && player != null) {
 			allowthing += 1;
 			elapsedtime2 = 0;
 			print ("20 ms");
@@ -100,12 +103,21 @@ bool touching_ground;
             
         }if (other.gameObject.tag == "LogDestroy")
         {
+            if (player != null)
+            {
+                PlayerControl player_cont = player.GetComponent<PlayerControl>();
+                player_cont.ExplodeSelf();
+            }
             Destroy(gameObject);
+            
+
         }
     }
     void clearplayer()
     {
         player.layer = 0;
+        PlayerControl player_cont = player.GetComponent<PlayerControl>();
+        player_cont.touching_ground = false;
         allowthing = 0;
         player = null;
     }
