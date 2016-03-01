@@ -19,13 +19,14 @@ public class CameraFollow : MonoBehaviour {
         float vertical = Input.GetAxisRaw("Vertical");
 
 
-        if (vertical > 0)
+        if (vertical == 1)
         {
             Camera cam = gameObject.GetComponent<Camera>();
             Vector3 cam_pos = gameObject.transform.position;
 
-            cam_pos.z = player.transform.position.z;
-
+         
+            cam_pos.y = player.transform.position.y + offsety;
+            cam_pos.z = player.transform.position.z + offsetz;
             gameObject.transform.position = cam_pos;
         }
         
@@ -35,9 +36,10 @@ public class CameraFollow : MonoBehaviour {
     public void respawn_player()
     {
         Camera cam = gameObject.GetComponent<Camera>();
-        Vector3 cam_pos = gameObject.transform.position;
+        Vector3 cam_pos = player.transform.position;
 
-        cam_pos.z = player.transform.position.z;
+        cam_pos.y += offsety;
+        cam_pos.z += offsetz;
 
         gameObject.transform.position = cam_pos;
     }

@@ -40,7 +40,9 @@ public class PlayerControl : MonoBehaviour {
 	void Update () {
         float Horizontal = Input.GetAxisRaw("Horizontal");
         float Vertical = Input.GetAxisRaw("Vertical");
-        
+        float Jump = Input.GetAxisRaw("Jump");
+
+
         if (touching_ground == false)
         {
             time_since_intersection += Time.deltaTime;
@@ -49,27 +51,43 @@ public class PlayerControl : MonoBehaviour {
         Vector3 temp_pos = gameObject.transform.position;
 
 
-        //Horizontal Movement
 
-        if (Horizontal > 0 && temp_pos.x < 15)
+
+        if (Horizontal > 0 && simple_pos.x < 2f && press == false )
         {
-            temp_pos.x += 10f * Time.deltaTime;
+            temp_pos.x += 5f;
+            simple_pos.x = (temp_pos.x - 2.5f) / 5f;
+            
             press = true;
-        }else if (Horizontal < 0 && temp_pos.x > -15)   
+        }else if (Horizontal < 0 && simple_pos.x > -2f && press == false)   
         {
-            temp_pos.x -= 10f * Time.deltaTime;
+            if (simple_pos.x == -3)
+            {
+                print("wtf");
+            }
+            temp_pos.x -= 5f;
+            simple_pos.x = (temp_pos.x - 2.5f) / 5f;
             press = true;
         }
+
+
+
         //Vertical Movement
         
         else if (Vertical > 0 && press == false)
         {
+            if (simple_pos.y > 0)
+            {
+                simple_pos.y -= 1;
+            }
             temp_pos.z += 2.5f;
             press = true;
         }
 
-        else if (Vertical < 0 && press == false)
+        else if (Vertical < 0 && press == false && simple_pos.y < 2)
         {
+            simple_pos.y += 1;
+
             temp_pos.z -= 2.5f;
             press = true;
         }
@@ -77,6 +95,18 @@ public class PlayerControl : MonoBehaviour {
         else if (Vertical == 0 && Horizontal == 0)
         {
             press = false;
+        }
+
+        //wall run
+        if (Jump > 0 && gameObject.transform.position.x - 2.5f >= 7f)
+        {
+            temp_pos.x += 2f;
+            press = true;
+
+        }else if (Jump > 0 && gameObject.transform.position.x - 2.5f <= -9f)
+        {
+            temp_pos.x -= 2f;
+            press = true;
         }
 
         gameObject.transform.position = temp_pos;
@@ -99,17 +129,29 @@ public class PlayerControl : MonoBehaviour {
                     {
                         if (collidedobjects[i].transform.parent.tag == "Wall")
                         {
-                            print("not a reg");
+                            if (gameObject.transform.position.x > 7.5f)
+                            {
+                                RotateRight();
+                            } else if (gameObject.transform.position.x < -7.5f)
+                            {
+                                RotateLeft();
+                            }
 
-                            RotateRight();
 
+                            
 
-
+                        }else
+                        {
+                            Vector3 playerPos = gameObject.transform.position;
+                            playerPos.x = collidedobjects[i].transform.position.x;
+                            gameObject.transform.position = playerPos;
                         }
                     }
-                    else
+                    else 
                     {
-                        print("Ground reg");
+                        Vector3 playerPos = gameObject.transform.position;
+                        playerPos.x = collidedobjects[i].transform.position.x;
+                        gameObject.transform.position = playerPos;
                     }
 
                     
@@ -130,6 +172,12 @@ public class PlayerControl : MonoBehaviour {
         {
             time_since_intersection = 0f;
         }
+
+
+       
+        
+
+
 
 
 
@@ -164,13 +212,13 @@ public class PlayerControl : MonoBehaviour {
     void RotateRight()
     {
         Vector3 tempPos = gameObject.transform.position;
-        tempPos.x = 0;
-        tempPos.z = -6;
+        tempPos.x = 2.5f;
+        simple_pos.x = 0f;
         gameObject.transform.position = tempPos;
 
 
         Vector3 eulerAngles = envs.transform.eulerAngles;
-        eulerAngles.x += 90;
+        eulerAngles.z -= 90;
 
         envs.transform.eulerAngles = eulerAngles;
        
@@ -180,6 +228,24 @@ public class PlayerControl : MonoBehaviour {
         new_wall = true;
 
 
+    }
+    void RotateLeft()
+    {
+        Vector3 tempPos = gameObject.transform.position;
+        tempPos.x = 2.5f;
+        simple_pos.x = 0f;
+        gameObject.transform.position = tempPos;
+
+
+        Vector3 eulerAngles = envs.transform.eulerAngles;
+        eulerAngles.z += 90;
+
+        envs.transform.eulerAngles = eulerAngles;
+
+        tempPos = envs.transform.position;
+        envs.transform.position = tempPos;
+
+        new_wall = true;
     }
 
 
@@ -196,6 +262,9 @@ public class PlayerControl : MonoBehaviour {
         Invoke("Respawn", 1.1f);
         simple_pos = new Vector2(0f, 0f);
     }
+
+
+
 
 
 }
