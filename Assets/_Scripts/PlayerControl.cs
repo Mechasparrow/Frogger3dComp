@@ -53,18 +53,14 @@ public class PlayerControl : MonoBehaviour {
 
 
 
-        if (Horizontal > 0 && simple_pos.x < 2f && press == false )
+        if (Horizontal > 0 && temp_pos.x < 12f && press == false )
         {
             temp_pos.x += 5f;
             simple_pos.x = (temp_pos.x - 2.5f) / 5f;
             
             press = true;
-        }else if (Horizontal < 0 && simple_pos.x > -2f && press == false)   
+        }else if (Horizontal < 0 && temp_pos.x > -7f && press == false)   
         {
-            if (simple_pos.x == -3)
-            {
-                print("wtf");
-            }
             temp_pos.x -= 5f;
             simple_pos.x = (temp_pos.x - 2.5f) / 5f;
             press = true;
@@ -120,9 +116,17 @@ public class PlayerControl : MonoBehaviour {
                     current_wall.tag = "Wall";
                     current_wall = collidedobjects[i].transform.parent.gameObject;
                     current_wall.tag = "Reg-Wall";
+
+
+                    terraingen.CheckSpawners();
                     new_wall = false;
                 }
-
+                else if (collidedobjects [i].tag == "Log")
+                {
+                    Vector3 playerPos = gameObject.transform.position;
+                    playerPos.x = collidedobjects[i].transform.position.x;
+                    gameObject.transform.position = playerPos;
+                }
                 else if (collidedobjects [i].tag == "Ground-Reg") {
 
                     if (collidedobjects [i].transform.parent != null)

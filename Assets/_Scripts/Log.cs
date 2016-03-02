@@ -101,8 +101,9 @@ bool touching_ground;
             player.layer = 9;
             print("Player");
             
-        }if (other.gameObject.tag == "LogDestroy")
+        }if (other.gameObject.tag == "LogDestroy" && other.gameObject.transform.parent == gameObject.transform.parent)
         {
+            
             if (player != null)
             {
                 PlayerControl player_cont = player.GetComponent<PlayerControl>();

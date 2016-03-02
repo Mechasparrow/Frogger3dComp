@@ -7024,7 +7024,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ground: {fileID: 166854, guid: 6f393765f30a85c4a87e870768183514, type: 2}
   water: {fileID: 198264, guid: edc3d062ddad77d4ea75c7895a7a4a72, type: 2}
-  exit: {fileID: 121064, guid: 3604da90fda3c154fad44217fd048574, type: 2}
+  exit_prefab: {fileID: 121064, guid: 3604da90fda3c154fad44217fd048574, type: 2}
   BarrelSpawner: {fileID: 189028, guid: 2a02bf38ad4de724eac6a0b3d0c3293f, type: 2}
   LeftLogSpawner: {fileID: 159902, guid: 57c00b8e3b591ac47bb038a14434f764, type: 2}
   RightLogSpawner: {fileID: 130990, guid: eccf9316a1a697d45be48b9ab5afee77, type: 2}

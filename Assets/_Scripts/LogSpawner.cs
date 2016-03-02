@@ -7,7 +7,7 @@ public class LogSpawner : MonoBehaviour {
 	public float speed;
 	public float log_speed;
 	public string direction;
-
+    public bool inuse = true;
 
 
 
@@ -27,5 +27,12 @@ public class LogSpawner : MonoBehaviour {
 		Log log = go.GetComponent<Log>();
 		log.speed = log_speed; 
 		log.direction = direction;
+        go.transform.parent = gameObject.transform;
+
+        if (inuse == false)
+        {
+            Destroy(go);
+        }
+
 	}
 }

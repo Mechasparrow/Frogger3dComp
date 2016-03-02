@@ -12,6 +12,8 @@ TagManager:
   - LogDestroy
   - Wall
   - Reg-Wall
+  - Log
+  - spawner
   layers:
   - Default
   - TransparentFX
