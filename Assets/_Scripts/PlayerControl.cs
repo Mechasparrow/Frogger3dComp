@@ -94,12 +94,12 @@ public class PlayerControl : MonoBehaviour {
         }
 
         //wall run
-        if (Jump > 0 && gameObject.transform.position.x - 2.5f >= 7f)
+        if (Jump > 0 && gameObject.transform.position.x - 2.5f >= 7f && press != true)
         {
             temp_pos.x += 2f;
             press = true;
 
-        }else if (Jump > 0 && gameObject.transform.position.x - 2.5f <= -9f)
+        }else if (Jump > 0 && gameObject.transform.position.x - 2.5f <= -9f && press != true)
         {
             temp_pos.x -= 2f;
             press = true;
@@ -122,6 +122,12 @@ public class PlayerControl : MonoBehaviour {
                     new_wall = false;
                 }
                 else if (collidedobjects [i].tag == "Log")
+                {
+                    Vector3 playerPos = gameObject.transform.position;
+                    playerPos.x = collidedobjects[i].transform.position.x;
+                    gameObject.transform.position = playerPos;
+
+                }else if (collidedobjects [i].tag == "Road")
                 {
                     Vector3 playerPos = gameObject.transform.position;
                     playerPos.x = collidedobjects[i].transform.position.x;
@@ -217,7 +223,6 @@ public class PlayerControl : MonoBehaviour {
     {
         Vector3 tempPos = gameObject.transform.position;
         tempPos.x = 2.5f;
-        simple_pos.x = 0f;
         gameObject.transform.position = tempPos;
 
 
@@ -229,6 +234,7 @@ public class PlayerControl : MonoBehaviour {
         tempPos = envs.transform.position;
         envs.transform.position = tempPos;
 
+
         new_wall = true;
 
 
@@ -237,7 +243,6 @@ public class PlayerControl : MonoBehaviour {
     {
         Vector3 tempPos = gameObject.transform.position;
         tempPos.x = 2.5f;
-        simple_pos.x = 0f;
         gameObject.transform.position = tempPos;
 
 
@@ -248,6 +253,9 @@ public class PlayerControl : MonoBehaviour {
 
         tempPos = envs.transform.position;
         envs.transform.position = tempPos;
+
+
+
 
         new_wall = true;
     }

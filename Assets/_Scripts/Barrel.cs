@@ -31,7 +31,7 @@ public class Barrel : MonoBehaviour {
 
     void OnTriggerEnter (Collider other)
     {
-        if (other.gameObject.tag == "BarrelDestroy")
+        if (other.gameObject.tag == "BarrelDestroy" && other.gameObject.transform.parent == gameObject.transform.parent)
         {
             Destroy(gameObject);
         }

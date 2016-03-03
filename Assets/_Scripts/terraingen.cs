@@ -4,34 +4,42 @@ using System.Collections.Generic;
 
 public class terraingen : MonoBehaviour {
 
-	public GameObject ground;
-    public GameObject water;
+	
+    //The exit to the level
     public GameObject exit_prefab;
-    public GameObject BarrelSpawner;
+
+    //biome that are in the game
+    public GameObject ground;
+    public GameObject water;
+    public GameObject road; 
+
+
+    //Barrel/Obstacle spawners
+    public GameObject LeftBarrelSpawner;
+    public GameObject RightBarrelSpawner;
+
+    //Log Spawners
     public GameObject LeftLogSpawner;
     public GameObject RightLogSpawner;
+
+    //The point of rotation for the walls
     public GameObject point_of_rotation;
+
+
+    //The player object
     public GameObject player;
 
+    //The length of the level
+    public float length;
 
-	// Use this for initialization
+	//When the game starts, Generate the Terrain
 	void Start () {
-        GenerateTerrain(20.5f);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    
-
-
-
-
+        GenerateTerrain(length);
 	}
 
+    //The actual script to generate the terrain
     public void GenerateTerrain(float z)
     {
-
-        
 
         Vector3 eulerangles;
         GameObject defaultenv = new GameObject();
@@ -44,14 +52,6 @@ public class terraingen : MonoBehaviour {
         exitPos.x = 2.5f;
         exit.transform.position = exitPos;
         exit.transform.parent = defaultenv.transform;
-
-
-
-
-
-
-
-
 
         PlayerControl pc = player.GetComponent<PlayerControl>();
         pc.current_wall = defaultenv;
@@ -182,11 +182,14 @@ public class terraingen : MonoBehaviour {
             }
             else
             {
-                if (biome <= 0.4)
+                if (biome <= 0.4) //40% chance of a water biome spawning
                 {
                     go = Instantiate(water) as GameObject;
+                }else if (biome > 0.4 && biome <= 0.8) // 40% chance of a road spawning
+                {
+                    go = Instantiate(road) as GameObject;
                 }
-                else
+                else //20% chance of a neutral ground spawning
                 {
                     go = Instantiate(ground) as GameObject;
                 }
@@ -209,10 +212,11 @@ public class terraingen : MonoBehaviour {
     {
         foreach (GameObject biome in biomeline)
         {
-            if (biome.tag == "Ground-Water")
+            float direction = Random.value;
+            if (biome.tag == "Ground-Water") //Check if the current object is water to generate logs
             {
-                float direction = Random.value;
-                if (direction <= 0.5)
+                
+                if (direction <= 0.5f) //50% left, 50% right
                 {
                     //go left
                     GameObject spawner = Instantiate(LeftLogSpawner) as GameObject;
@@ -232,11 +236,6 @@ public class terraingen : MonoBehaviour {
                     spawner2.transform.position = spawnerPos2;
                     spawner2.transform.parent = go.transform;
                     
-
-
-
-
-
                 }
                 else
                 {
@@ -257,11 +256,31 @@ public class terraingen : MonoBehaviour {
                     spawnerPos2.z = spawnerPos.z + 2.5f;
                     spawner2.transform.position = spawnerPos2;
                     spawner2.transform.parent = go.transform;
-                    
-
 
                 }
 
+            }else if (biome.tag == "Road") //Check if its a road to generate cars
+            {
+                if (direction <= 0.5f) //50% left, 50% right
+                {
+                    GameObject spawner = Instantiate(LeftBarrelSpawner) as GameObject;
+                    Vector3 spawnerPos = spawner.transform.position;
+                    spawnerPos.y = 1f;
+                    spawnerPos.x = 10f;
+                    spawnerPos.z = biome.transform.position.z - 1.5f;
+                    spawner.transform.position = spawnerPos;
+                    spawner.transform.parent = go.transform;
+                }
+                else
+                {
+                    GameObject spawner = Instantiate(RightBarrelSpawner) as GameObject;
+                    Vector3 spawnerPos = spawner.transform.position;
+                    spawnerPos.y = 1f;
+                    spawnerPos.x = -10f;
+                    spawnerPos.z = biome.transform.position.z - 1.5f;
+                    spawner.transform.position = spawnerPos;
+                    spawner.transform.parent = go.transform;
+                }
             }
         }
     }
@@ -278,6 +297,8 @@ public class terraingen : MonoBehaviour {
         foreach (GameObject spawner in spawners)
         {
             LogSpawner ls;
+            BarrelSpawn bs;
+
             if (spawner.GetComponent<LogSpawner>() != null)
             {
                 ls = spawner.GetComponent<LogSpawner>();
@@ -288,6 +309,17 @@ public class terraingen : MonoBehaviour {
                 else
                 {
                     ls.inuse = true;
+                }
+            }else if (spawner.GetComponent<BarrelSpawn>() != null)
+            {
+                bs = spawner.GetComponent<BarrelSpawn>();
+                if (spawner.transform.parent.tag == "Wall")
+                {
+                    bs.inuse = false;
+                }
+                else
+                {
+                    bs.inuse = true;
                 }
             }
 
