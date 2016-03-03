@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 public class terraingen : MonoBehaviour {
 
-	
+
+	public float barrel_speed;
+
     //The exit to the level
     public GameObject exit_prefab;
 
@@ -46,12 +48,6 @@ public class terraingen : MonoBehaviour {
         defaultenv.tag = "Reg-Wall";
         defaultenv.name = "Floor";
 
-        GameObject exit = Instantiate(exit_prefab) as GameObject;
-        Vector3 exitPos = exit.transform.position;
-        exitPos.z = z - 0.5f;
-        exitPos.x = 2.5f;
-        exit.transform.position = exitPos;
-        exit.transform.parent = defaultenv.transform;
 
         PlayerControl pc = player.GetComponent<PlayerControl>();
         pc.current_wall = defaultenv;
@@ -70,10 +66,10 @@ public class terraingen : MonoBehaviour {
         ceiling.name = "Ceiling";
 
 
-        AddWall(defaultenv, z);
-        AddWall(rightwall, z);
-        AddWall(leftwall, z);
-        AddWall(ceiling, z);
+        AddWall(defaultenv, z,true);
+        AddWall(rightwall, z,false);
+		AddWall(leftwall, z,false);
+		AddWall(ceiling, z,false);
 
         defaultenv.transform.parent = point_of_rotation.transform;
 
@@ -130,9 +126,9 @@ public class terraingen : MonoBehaviour {
 
 
 
-    public void AddWall(GameObject wall, float z)
+	public void AddWall(GameObject wall, float z, bool isexit)
     {
-        List<GameObject> biomeline = GenerateLine(z);
+		List<GameObject> biomeline = GenerateLine(z,isexit);
         AddSpawners(biomeline, wall);
 
 
@@ -164,7 +160,7 @@ public class terraingen : MonoBehaviour {
 
 
 
-    public List<GameObject> GenerateLine(float z)
+	public List<GameObject> GenerateLine(float z,bool isexit)
     {
 
         List<GameObject> biomeline = new List<GameObject>();
@@ -175,8 +171,10 @@ public class terraingen : MonoBehaviour {
         {
             float biome = Random.value;
             GameObject go;
-
-            if (i == -4.5f || i == z)
+			if (i == z && isexit == true) {
+				go = Instantiate (exit_prefab);
+			}
+            else if (i == -4.5f || i == z)
             {
                 go = Instantiate(ground) as GameObject;
             }
