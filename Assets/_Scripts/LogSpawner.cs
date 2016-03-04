@@ -18,7 +18,14 @@ public class LogSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (inuse == false) {
+			GameObject[] logs = GameObject.FindGameObjectsWithTag ("Log");
+			foreach (GameObject log in logs) {
+				if (log.transform.parent == gameObject.transform) {
+					Destroy (log);
+				}
+			}
+		}
 	}
 
 	void spawnLog(){

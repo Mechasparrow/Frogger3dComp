@@ -17,7 +17,14 @@ public class BarrelSpawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (inuse == false) {
+			GameObject[] barrels = GameObject.FindGameObjectsWithTag ("Barrel");
+			foreach (GameObject barrel in barrels) {
+				if (barrel.transform.parent == gameObject.transform) {
+					Destroy (barrel);
+				}
+			}
+		}
 	}
 
     void spawnBarrel()

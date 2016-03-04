@@ -117,15 +117,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Barrel_prefab: {fileID: 129474, guid: 55c5dff5c0cbe274bb6a376cb634bc5b, type: 2}
   speed: 0.9
-  barrel_speed: 500
+  barrel_speed: 1000
   direction: left
+  inuse: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: barrel_speed
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 176676}

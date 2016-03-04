@@ -15,6 +15,8 @@ public class PlayerControl : MonoBehaviour {
     public GameObject envs;
     public bool new_wall = false;
     public GameObject current_wall;
+	public int deaths = 0;
+
 
     public float bounds = 10f;
 
@@ -94,12 +96,12 @@ public class PlayerControl : MonoBehaviour {
         }
 
         //wall run
-        if (Jump > 0 && gameObject.transform.position.x - 2.5f >= 7f && press != true)
+		if (Horizontal > 0 && gameObject.transform.position.x - 2.5f >= 7f && press != true)
         {
             temp_pos.x += 2f;
             press = true;
 
-        }else if (Jump > 0 && gameObject.transform.position.x - 2.5f <= -9f && press != true)
+		}else if (Horizontal < 0 && gameObject.transform.position.x - 2.5f <= -9f && press != true)
         {
             temp_pos.x -= 2f;
             press = true;
@@ -127,13 +129,8 @@ public class PlayerControl : MonoBehaviour {
                     playerPos.x = collidedobjects[i].transform.position.x;
                     gameObject.transform.position = playerPos;
 
-                }else if (collidedobjects [i].tag == "Road")
-                {
-                    Vector3 playerPos = gameObject.transform.position;
-                    playerPos.x = collidedobjects[i].transform.position.x;
-                    gameObject.transform.position = playerPos;
                 }
-                else if (collidedobjects [i].tag == "Ground-Reg") {
+				else if (collidedobjects [i].tag == "Ground-Reg" || collidedobjects [i].tag == "Road") {
 
                     if (collidedobjects [i].transform.parent != null)
                     {
@@ -215,7 +212,7 @@ public class PlayerControl : MonoBehaviour {
 		gameObject.transform.position = spawn_point.transform.position;
 
         cam.gameObject.GetComponent<CameraFollow>().respawn_player();
-
+		deaths += 1;
 
 	}
 
