@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour {
-	public Scene level2;
-
-
+    public int level = 1;
+    public CameraFollow cf = Camera.main.GetComponent<CameraFollow>();
 	public GameObject prefab_explosion;
 
 
@@ -26,7 +26,23 @@ public class Exit : MonoBehaviour {
 			GameObject explosion = Instantiate (prefab_explosion) as GameObject;
 			explosion.transform.position = gameObject.transform.position;
 			c.gameObject.SetActive (false);
-			SceneManager.LoadScene ("Level2");
+
+            if (SceneManager.GetActiveScene().name == "Level1")
+            {
+                SceneManager.LoadScene("Level2");
+            }else if (SceneManager.GetActiveScene().name == "Level2")
+            {
+                SceneManager.LoadScene("Level3");
+            }
+
+
+
+
+
+
+
+
+
             print("Game End");
         }
     }

@@ -15,6 +15,7 @@ TagManager:
   - Log
   - spawner
   - Road
+  - Question
   layers:
   - Default
   - TransparentFX

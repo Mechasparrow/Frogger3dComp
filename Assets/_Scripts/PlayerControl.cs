@@ -17,6 +17,10 @@ public class PlayerControl : MonoBehaviour {
     public GameObject current_wall;
 	public int deaths = 0;
 
+    public Canvas c; 
+
+
+
 
     public float bounds = 10f;
 
@@ -123,16 +127,19 @@ public class PlayerControl : MonoBehaviour {
                     terraingen.CheckSpawners();
                     new_wall = false;
                 }
-                else if (collidedobjects [i].tag == "Log")
+                else if (collidedobjects[i].tag == "Log")
                 {
                     Vector3 playerPos = gameObject.transform.position;
                     playerPos.x = collidedobjects[i].transform.position.x;
                     gameObject.transform.position = playerPos;
 
+                } else if (collidedobjects[i].tag == "Question")
+                {
+                    c.gameObject.SetActive(true);
                 }
-				else if (collidedobjects [i].tag == "Ground-Reg" || collidedobjects [i].tag == "Road") {
+                else if (collidedobjects[i].tag == "Ground-Reg" || collidedobjects[i].tag == "Road") {
 
-                    if (collidedobjects [i].transform.parent != null)
+                    if (collidedobjects[i].transform.parent != null)
                     {
                         if (collidedobjects[i].transform.parent.tag == "Wall")
                         {
@@ -145,25 +152,25 @@ public class PlayerControl : MonoBehaviour {
                             }
 
 
-                            
 
-                        }else
+
+                        } else
                         {
                             Vector3 playerPos = gameObject.transform.position;
                             playerPos.x = collidedobjects[i].transform.position.x;
                             gameObject.transform.position = playerPos;
                         }
                     }
-                    else 
+                    else
                     {
                         Vector3 playerPos = gameObject.transform.position;
                         playerPos.x = collidedobjects[i].transform.position.x;
                         gameObject.transform.position = playerPos;
                     }
 
-                    
+
                     break;
-				} else if (collidedobjects [i].tag == "Barrel" || collidedobjects [i].tag == "Ground-Water") {
+                } else if (collidedobjects[i].tag == "Barrel" || collidedobjects[i].tag == "Ground-Water") {
                     ExplodeSelf();
                 }
             }
@@ -207,7 +214,7 @@ public class PlayerControl : MonoBehaviour {
 
 
 
-	void Respawn(){
+	public void Respawn(){
 		gameObject.SetActive (true);
 		gameObject.transform.position = spawn_point.transform.position;
 
