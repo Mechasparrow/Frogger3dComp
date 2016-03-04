@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour {
 
@@ -9,15 +9,16 @@ public class PlayerControl : MonoBehaviour {
     bool press;
     Vector2 simple_pos;
     public Transform spawn_point;
-	public GameObject prefab_explosion;
+    public GameObject prefab_explosion;
     public bool touching_ground = false;
     public Camera cam;
     public GameObject envs;
     public bool new_wall = false;
     public GameObject current_wall;
-	public int deaths = 0;
+    public int deaths = 0;
 
-    public Canvas c; 
+    int score = 0;
+    public Text score_text;
 
 
 
@@ -26,24 +27,25 @@ public class PlayerControl : MonoBehaviour {
 
 
     float time_since_intersection = 0f;
-    
+
 
 
 
     public List<GameObject> collidedobjects = new List<GameObject>();
 
 
-    void Start () {
+    void Start() {
         press = false;
         simple_pos.x = 0;
         simple_pos.y = 0;
-	}
+        score_text.text = "Score: " + score;
+    }
 
-    
 
 
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
         float Horizontal = Input.GetAxisRaw("Horizontal");
         float Vertical = Input.GetAxisRaw("Vertical");
         float Jump = Input.GetAxisRaw("Jump");
@@ -59,13 +61,13 @@ public class PlayerControl : MonoBehaviour {
 
 
 
-        if (Horizontal > 0 && temp_pos.x < 12f && press == false )
+        if (Horizontal > 0 && temp_pos.x < 12f && press == false)
         {
             temp_pos.x += 5f;
             simple_pos.x = (temp_pos.x - 2.5f) / 5f;
-            
+
             press = true;
-        }else if (Horizontal < 0 && temp_pos.x > -7f && press == false)   
+        } else if (Horizontal < 0 && temp_pos.x > -7f && press == false)
         {
             temp_pos.x -= 5f;
             simple_pos.x = (temp_pos.x - 2.5f) / 5f;
@@ -75,13 +77,15 @@ public class PlayerControl : MonoBehaviour {
 
 
         //Vertical Movement
-        
+
         else if (Vertical > 0 && press == false)
         {
             if (simple_pos.y > 0)
             {
                 simple_pos.y -= 1;
             }
+            score++;
+            setScore();
             temp_pos.z += 2.5f;
             press = true;
         }
@@ -100,12 +104,12 @@ public class PlayerControl : MonoBehaviour {
         }
 
         //wall run
-		if (Horizontal > 0 && gameObject.transform.position.x - 2.5f >= 7f && press != true)
+        if (Horizontal > 0 && gameObject.transform.position.x - 2.5f >= 7f && press != true)
         {
             temp_pos.x += 2f;
             press = true;
 
-		}else if (Horizontal < 0 && gameObject.transform.position.x - 2.5f <= -9f && press != true)
+        } else if (Horizontal < 0 && gameObject.transform.position.x - 2.5f <= -9f && press != true)
         {
             temp_pos.x -= 2f;
             press = true;
@@ -133,9 +137,6 @@ public class PlayerControl : MonoBehaviour {
                     playerPos.x = collidedobjects[i].transform.position.x;
                     gameObject.transform.position = playerPos;
 
-                } else if (collidedobjects[i].tag == "Question")
-                {
-                    c.gameObject.SetActive(true);
                 }
                 else if (collidedobjects[i].tag == "Ground-Reg" || collidedobjects[i].tag == "Road") {
 
@@ -177,19 +178,19 @@ public class PlayerControl : MonoBehaviour {
         }
 
 
-        if (time_since_intersection > 100f/1000f && touching_ground == false)
+        if (time_since_intersection > 100f / 1000f && touching_ground == false)
         {
             time_since_intersection = 0f;
             ExplodeSelf();
 
-        }else if (time_since_intersection > 100f/1000f && touching_ground != false)
+        } else if (time_since_intersection > 100f / 1000f && touching_ground != false)
         {
             time_since_intersection = 0f;
         }
 
 
-       
-        
+
+
 
 
 
@@ -197,7 +198,7 @@ public class PlayerControl : MonoBehaviour {
 
         collidedobjects = new List<GameObject>();
 
-	}
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -214,14 +215,15 @@ public class PlayerControl : MonoBehaviour {
 
 
 
-	public void Respawn(){
-		gameObject.SetActive (true);
-		gameObject.transform.position = spawn_point.transform.position;
+    public void Respawn() {
+        gameObject.SetActive(true);
+        gameObject.transform.position = spawn_point.transform.position;
 
         cam.gameObject.GetComponent<CameraFollow>().respawn_player();
-		deaths += 1;
-
-	}
+        deaths += 1;
+        score = 0;
+        setScore();
+    }
 
     void RotateRight()
     {
@@ -234,7 +236,7 @@ public class PlayerControl : MonoBehaviour {
         eulerAngles.z -= 90;
 
         envs.transform.eulerAngles = eulerAngles;
-       
+
         tempPos = envs.transform.position;
         envs.transform.position = tempPos;
 
@@ -280,7 +282,10 @@ public class PlayerControl : MonoBehaviour {
     }
 
 
-
+    public void setScore()
+    {
+        score_text.text = "Score: " + score;
+    }
 
 
 }

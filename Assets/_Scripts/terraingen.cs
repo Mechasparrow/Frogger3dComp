@@ -177,17 +177,14 @@ public class terraingen : MonoBehaviour {
             }
             else
             {
-                if (biome <= 0.3) //30% chance of a water biome spawning
+                if (biome <= 0.4) //40% chance of a water biome spawning
                 {
                     go = Instantiate(water) as GameObject;
-                }else if (biome > 0.3 && biome <= 0.7) // 40% chance of a road spawning
+                }else if (biome > 0.4 && biome <= 0.8) // 40% chance of a road spawning
                 {
                     go = Instantiate(road) as GameObject;
                 }
-                else if (biome > 0.7 && biome <= 0.8)//10% chance of a question ground spawning
-                {
-                    go = Instantiate(question_trigger) as GameObject;
-                }else
+                else
                 {
                     go = Instantiate(ground);
                 }
