@@ -67,9 +67,9 @@ public class terraingen : MonoBehaviour {
 
 
         AddWall(defaultenv, z,true);
-        AddWall(rightwall, z,false);
-		AddWall(leftwall, z,false);
-		AddWall(ceiling, z,false);
+        AddWall(rightwall, z,true);
+		AddWall(leftwall, z,true);
+		AddWall(ceiling, z,true);
 
         defaultenv.transform.parent = point_of_rotation.transform;
 

@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Log : MonoBehaviour {
-bool touching_ground;
     public string direction;
 	public float speed;
     GameObject player = null;
@@ -11,7 +10,6 @@ bool touching_ground;
     int allowthing = -1;
 	// Use this for initialization
 	void Start () {
-        touching_ground = false;
         elapsedtime = 0f;
 		elapsedtime2 = 0f;
 	}

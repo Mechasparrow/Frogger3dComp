@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour {
+	public Scene level2;
+
 
 	public GameObject prefab_explosion;
 
@@ -23,6 +26,7 @@ public class Exit : MonoBehaviour {
 			GameObject explosion = Instantiate (prefab_explosion) as GameObject;
 			explosion.transform.position = gameObject.transform.position;
 			c.gameObject.SetActive (false);
+			SceneManager.LoadScene ("Level2");
             print("Game End");
         }
     }
