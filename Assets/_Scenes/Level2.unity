@@ -264,6 +264,10 @@ Prefab:
       propertyPath: current_wall
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11487372, guid: 8dde7949ae9848f469db13659fffd169, type: 2}
+      propertyPath: c
+      value: 
+      objectReference: {fileID: 803045962}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8dde7949ae9848f469db13659fffd169, type: 2}
   m_IsPrefabParent: 0
@@ -415,7 +419,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1001 &790201207
 Prefab:
   m_ObjectHideFlags: 0
@@ -455,6 +459,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11495164, guid: 4a7e5c1d1f8762841b7fc5e37df3eed1, type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 885399969}
     - target: {fileID: 11495876, guid: 4a7e5c1d1f8762841b7fc5e37df3eed1, type: 2}
       propertyPath: point_of_rotation
       value: 
@@ -463,26 +471,6 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 88679404}
-    - target: {fileID: 11495164, guid: 4a7e5c1d1f8762841b7fc5e37df3eed1, type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 885399969}
-    - target: {fileID: 11495876, guid: 4a7e5c1d1f8762841b7fc5e37df3eed1, type: 2}
-      propertyPath: exit_prefab
-      value: 
-      objectReference: {fileID: 166854, guid: c07b10eec8629f9448cf36b9931636ae, type: 2}
-    - target: {fileID: 11495876, guid: 4a7e5c1d1f8762841b7fc5e37df3eed1, type: 2}
-      propertyPath: ground
-      value: 
-      objectReference: {fileID: 166854, guid: 757f46adb6361a74b815f252914a81e5, type: 2}
-    - target: {fileID: 11495164, guid: 4a7e5c1d1f8762841b7fc5e37df3eed1, type: 2}
-      propertyPath: offsetz
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11495876, guid: 4a7e5c1d1f8762841b7fc5e37df3eed1, type: 2}
-      propertyPath: length
-      value: 40.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4a7e5c1d1f8762841b7fc5e37df3eed1, type: 2}
   m_IsPrefabParent: 0
@@ -503,7 +491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &803045960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,7 +559,7 @@ RectTransform:
   m_Children:
   - {fileID: 21414861}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
