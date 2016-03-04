@@ -325,6 +325,10 @@ Prefab:
       propertyPath: current_wall
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11487372, guid: 8dde7949ae9848f469db13659fffd169, type: 2}
+      propertyPath: c
+      value: 
+      objectReference: {fileID: 803045962}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8dde7949ae9848f469db13659fffd169, type: 2}
   m_IsPrefabParent: 0
