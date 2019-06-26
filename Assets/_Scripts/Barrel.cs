@@ -16,13 +16,6 @@ public class Barrel : MonoBehaviour {
 	void Update () {
         Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         Vector3 vel = new Vector3(0f, 0f, 0f);
-        if (direction == "right")
-        {
-            vel.x = speed * Time.deltaTime;  
-        } else if (direction == "left")
-        {
-
-        }
 
         switch (direction)
         {
@@ -35,6 +28,15 @@ public class Barrel : MonoBehaviour {
         }
         rb.velocity = vel;
     }
+
+    void OnTriggerEnter (Collider other)
+    {
+        if (other.gameObject.tag == "BarrelDestroy" && other.gameObject.transform.parent == gameObject.transform.parent)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
 
 }

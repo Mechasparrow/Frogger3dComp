@@ -87,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -6.09}
+  m_LocalPosition: {x: 2.5, y: 1, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 476382}
@@ -219,6 +219,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d972f18e3379448b32b2da98828b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawn_point: {fileID: 0}
+  prefab_explosion: {fileID: 144830, guid: b795fb7bf3c9c544e83f32758c8d3805, type: 2}
+  touching_ground: 0
+  cam: {fileID: 0}
+  envs: {fileID: 0}
+  new_wall: 0
+  current_wall: {fileID: 0}
+  deaths: 0
+  score_text: {fileID: 0}
+  bounds: 10
+  collidedobjects: []
 --- !u!135 &13518134
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -7,16 +7,24 @@ public class BarrelSpawn : MonoBehaviour {
     public float speed;
     public float barrel_speed;
     public string direction;
+    public bool inuse = true;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         InvokeRepeating("spawnBarrel", speed, speed);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (inuse == false) {
+			GameObject[] barrels = GameObject.FindGameObjectsWithTag ("Barrel");
+			foreach (GameObject barrel in barrels) {
+				if (barrel.transform.parent == gameObject.transform) {
+					Destroy (barrel);
+				}
+			}
+		}
 	}
 
     void spawnBarrel()
@@ -26,6 +34,13 @@ public class BarrelSpawn : MonoBehaviour {
         Barrel bar = go.GetComponent<Barrel>();
         bar.speed = barrel_speed; 
         bar.direction = direction;
+        go.transform.parent = gameObject.transform;
+
+        if (inuse == false)
+        {
+            Destroy(go);
+        }
+
 
     }
 
